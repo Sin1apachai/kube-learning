@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-nginx-config
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>Kubernetes Tutorial</title>
+        <meta charset="utf-8">
+      </head>
+      <body style="background-color: #282c34; color: white; text-align: center; padding: 50px; font-family: sans-serif;">
+        <h1>🎉 ยินดีด้วย! 🎉</h1>
+        <h2>คุณกำลังใช้งาน Nginx ที่โหลดหน้าเว็บจาก ConfigMap ของ Kubernetes</h2>
+        <p>นี่คือบทเรียนที่ 2: ConfigMaps & Secrets</p>
+      </body>
+    </html>
