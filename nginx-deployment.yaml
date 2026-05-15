@@ -19,9 +19,9 @@ spec:
         image: nginx:latest
         resources:
           requests:
-            cpu: 100m # ขอใช้ CPU อย่างน้อย 0.1 Core
+            cpu: 10m # ลดลงเหลือ 0.01 Core เพื่อให้เกิน 50% ได้ง่ายขึ้น
           limits:
-            cpu: 200m # ห้ามใช้ CPU เกิน 0.2 Core
+            cpu: 50m
         ports:
         - containerPort: 80
         volumeMounts:
