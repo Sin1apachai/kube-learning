@@ -1,0 +1,18 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: my-nginx-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: my-nginx-app # ชื่อของ Deployment ที่เราต้องการคุม
+  minReplicas: 2 # จำนวน Pod ขั้นต่ำเวลาคนเข้าน้อย
+  maxReplicas: 10 # ขยายได้สูงสุด 10 Pod เวลาคนเข้าเยอะ
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50 # ถ้า CPU ของ Pod เฉลี่ยเกิน 50% ให้เริ่มสร้าง Pod ใหม่ทันที

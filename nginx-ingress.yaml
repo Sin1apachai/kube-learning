@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-nginx-ingress
+  annotations:
+    # บอกให้รู้ว่าเราใช้ Nginx เป็นตัวจัดการ Ingress (ถ้ามีการติดตั้งไว้)
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: local.bestie.com # สมมติว่านี่คือโดเมนของเรา
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: my-nginx-service
+            port:
+              number: 80

@@ -17,6 +17,11 @@ spec:
       containers:
       - name: nginx
         image: nginx:latest
+        resources:
+          requests:
+            cpu: 100m # ขอใช้ CPU อย่างน้อย 0.1 Core
+          limits:
+            cpu: 200m # ห้ามใช้ CPU เกิน 0.2 Core
         ports:
         - containerPort: 80
         volumeMounts:
