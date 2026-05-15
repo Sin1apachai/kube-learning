@@ -5,7 +5,7 @@ metadata:
   labels:
     app: nginx
 spec:
-  replicas: 2 # สั่งให้รัน 2 Pod พร้อมกัน
+  replicas: 3 # สั่งให้รัน 2 Pod พร้อมกัน
   selector:
     matchLabels:
       app: nginx
