@@ -7,7 +7,7 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: my-nginx-app # ชื่อของ Deployment ที่เราต้องการคุม
-  minReplicas: 2 # จำนวน Pod ขั้นต่ำเวลาคนเข้าน้อย
+  minReplicas: 1 # จำนวน Pod ขั้นต่ำเวลาคนเข้าน้อย
   maxReplicas: 10 # ขยายได้สูงสุด 10 Pod เวลาคนเข้าเยอะ
   metrics:
   - type: Resource
