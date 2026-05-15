@@ -1,0 +1,38 @@
+name: CI/CD Pipeline to Kubernetes
+
+on:
+  push:
+    branches:
+      - main # ทำงานเมื่อมีการ Push โค้ดเข้า branch main
+    paths-ignore:
+      - 'k8s/**' # ไม่ต้องทำงานถ้าสิ่งที่เปลี่ยนคือไฟล์ YAML ของ Kubernetes เอง
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # สมมติว่านี่คือขั้นตอน CI: Build Docker Image
+      - name: Build Docker Image
+        run: |
+          echo "กำลัง Build Docker Image..."
+          # docker build -t my-username/my-app:${{ github.sha }} .
+          # docker push my-username/my-app:${{ github.sha }}
+
+      # ขั้นตอน CD: นำ Image Tag ใหม่ไปใส่ในไฟล์ YAML
+      - name: Update Kubernetes Manifest
+        run: |
+          # แก้ไขไฟล์ deployment.yaml ให้ชี้ไปที่ Image ใหม่ (จำลองการใช้ sed)
+          echo "อัปเดตไฟล์ YAML..."
+          # sed -i 's|image: my-username/my-app:.*|image: my-username/my-app:${{ github.sha }}|' nginx-deployment.yaml
+          
+      # นำไฟล์ YAML ที่แก้แล้ว Push กลับขึ้น GitHub
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add nginx-deployment.yaml
+          git commit -m "Update image tag to ${{ github.sha }} [skip ci]" || echo "No changes to commit"
+          # git push origin main
